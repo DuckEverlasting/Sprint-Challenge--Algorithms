@@ -9,6 +9,7 @@ class SortingRobot:
         self._light = "OFF"     # The state of the robot's light
         self._time = 0          # A time counter (stretch)
 
+
     def can_move_right(self):
         """
         Returns True if the robot can move right or False if it's

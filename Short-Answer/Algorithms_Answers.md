@@ -2,7 +2,7 @@
 
 ## Exercise I
 
-a)  This is only going to run once, no matter what you put into it. The runtime complexity is O(1). Congratulations.
+a)  This will run exactly "n" times every time. complexity =  O(n). I HAD THIS THE WHOLE TIME.
 
 
 b)  This takes a process that runs at O(log2(n)), and runs it n times. So the complexity is O(n * log2(n)) 

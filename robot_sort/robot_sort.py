@@ -96,8 +96,91 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+
+        # EDGE CASE: 1 item list
+        if not self.can_move_right():
+            return
+
+        # SET LARGEST ITEM
+        self.swap_item()
+        while not self.light_is_on():
+            self.move_right()
+            if self.can_move_right():
+                if self.compare_item() is -1:
+                    self.swap_item()
+            else:
+                if self.compare_item() is 1:
+                    self.swap_item()
+                self.set_light_on()
+
+        # SORT THE REST
+        while self.light_is_on():
+
+            # FIND NEXT LARGEST
+            while self.can_move_left():
+                self.move_left()
+                if self.can_move_left():
+                    if self.compare_item() is -1:
+                        self.swap_item()
+                        
+            # RETURN TO SORTED LIST
+            while self.can_move_right():
+                self.move_right()
+            while self.compare_item() in [-1, 0]:
+                self.move_left()
+
+            # PLACE ITEM
+            self.swap_item()
+
+            # CHECK IF DONE
+            if not self.can_move_left():
+                self.set_light_off()
+
+    def bubble_sort(self):
+
+        # EDGE CASE: 1 item list
+        if not self.can_move_right():
+            return
+
+        # START CHUGGING
+        while not self.light_is_on():
+
+            # LOOP WILL HAVE TO TURN LIGHT OFF TO KEEP GOING
+            self.set_light_on()
+
+            # SORT TO THE RIGHT
+            while self.can_move_right():
+
+                # PICK UP ITEM TO CHECK
+                self.swap_item()
+                self.move_right()
+
+                # IF ANY ITEMS NEED TO CHANGE POSITION, LOOP KEEPS GOING
+                if self.compare_item() is 1:
+                    self.set_light_off()
+                    self.swap_item()
+
+                # RETURN SMALLER ITEM TO EMPTY SPACE
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+
+            # SORT TO THE LEFT
+            while self.can_move_left():
+                
+                # PICK UP ITEM TO CHECK
+                self.swap_item()
+                self.move_left()
+
+                # IF ANY ITEMS NEED TO CHANGE POSITION, LOOP KEEPS GOING
+                if self.compare_item() is -1:
+                    self.set_light_off()
+                    self.swap_item()
+
+                # RETURN LARGER ITEM TO EMPTY SPACE
+                self.move_right()
+                self.swap_item()
+                self.move_left()
 
 
 if __name__ == "__main__":
